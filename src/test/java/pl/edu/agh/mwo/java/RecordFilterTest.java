@@ -16,27 +16,10 @@ import java.util.TreeMap;
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class RecordFilterTest {
     /**
      * Rigorous Test :-)
      */
-    @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
-    }
-
-
-    @Test
-    public void toStringFromRecordEntry(){
-        LocalDate date =  LocalDate.of(2020,6,20);
-        RecordEntry  recordEntry = new RecordEntry();
-        recordEntry.setWorkerName("Janek");
-        recordEntry.setDate(date);
-        recordEntry.setDescription("some important stuff");
-        recordEntry.setProjectName("Project Manhattan");
-        recordEntry.setWorkingHours(8);
-        assertTrue(recordEntry.toString().equals("Janek spent 8.0h on project Project Manhattan doing some important stuff (2020-06-20)"));
-    }
 
     @Test
     public void filteringRecordEntryCollection() {
@@ -92,7 +75,7 @@ public class AppTest {
             String key = entry.getKey();
             Double value = entry.getValue();
             retVal = key + " => " + value + " h";
-           //System.out.println(key + " => " + value + " h");
+           System.out.println(key + " => " + value + " h");
         }
         assertTrue(retVal.equals("Janek => 8.0 h"));
     }

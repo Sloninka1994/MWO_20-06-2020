@@ -4,6 +4,7 @@ import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 import pl.edu.agh.mwo.java.DataModel.RecordFilter;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class Report1 {
@@ -25,5 +26,14 @@ public class Report1 {
         return retVal;
     }
 
+    public void printOnConsole(){
+        TreeMap<String, Double> a = getReport();
+
+        for(Map.Entry<String,Double> entry : a.entrySet()) {
+            String key = entry.getKey();
+            Double value = entry.getValue();
+            System.out.println(key + " => " + value + " h");
+        }
+    }
 
 }
