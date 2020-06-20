@@ -1,13 +1,17 @@
 package pl.edu.agh.mwo.java;
+import pl.edu.agh.mwo.java.DataModel.RecordEntry;
+import pl.edu.agh.mwo.java.ReadData.ReadData;
 import pl.edu.agh.mwo.java.Reports.Report1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Menu {
-	
+	static ArrayList<RecordEntry> re = new ArrayList<RecordEntry>();
+
 	public static String getPath(){
-		String path ;
+		String path;
 		while (true) {
 			Scanner scan = new Scanner(System.in);
 	        System.out.println();
@@ -25,11 +29,6 @@ public class Menu {
 	public static void printMenu() {
 		while (true) {
 
-
-
-
-
-
 			Scanner scan = new Scanner(System.in);
 			System.out.println();
 			System.out.println("Wybierz, który raport chcesz wygenerować: ");
@@ -38,14 +37,25 @@ public class Menu {
 			System.out.println("3: Szczegółowy wykaz pracy kazdego pracownika");
 			System.out.println("4: Procentowe zaangazowanie danego pracownika w projektach w danym roku");
 			System.out.println("5: Szczegółowy wykaz pracy w danym projekcie");
-			System.out.println("6: Exit");
+			System.out.println("6: Pokaż wszystkie zaimportowane dane");
+			System.out.println("7: Exit");
 			
 			String option = scan.nextLine();
 			
 			switch (option) {
 			case "1": 
 				System.out.println("Generating Report 1");
-				//Report1 r1 = new Report1();
+				System.out.println("Podaj rok dla którego am powstać raport:");
+				String sYear = scan.nextLine();
+				int Year;
+				try {
+					Year = Integer.parseInt(sYear);
+				} catch (Exception e) {
+					System.out.println("Wprowadzono błędną wartość");
+					break;
+				}
+				Report1 r1 = new Report1(re,Year);
+				r1.printOnConsole();
 				// generate and print report
 				break;
 			case "2": 
@@ -61,6 +71,11 @@ public class Menu {
 				System.out.println("Generating Report 5");
 				break;
 			case "6":
+				for(RecordEntry itm : re){
+					System.out.println(itm.toString());
+				}
+				break;
+			case "7":
 				System.out.println("Zapraszamy ponownie! ");
 				return;
 			default:
@@ -77,13 +92,17 @@ public class Menu {
     	String option;
     	System.out.println("Witaj w programie do generowania raportów - MWO2020!");
     	System.out.println("____________________________________________________");
-    	
+
     	path = getPath();
     	System.out.println(path);
-    	// Funkcja do wczytywania danych
-    	
-    	printMenu();
-    	
+
+    	re = ReadData.readAllFromFolder(path);
+
+    	if (re.size() > 0) {
+			printMenu();
+		}else{
+			System.out.println("Wczytywanie danych nie powiodło się.");
+		}
         //Funkcje odpowiednie do raportu -> Wczytywanie Roku, miesiąca, Imienia, etc;
     	
     	

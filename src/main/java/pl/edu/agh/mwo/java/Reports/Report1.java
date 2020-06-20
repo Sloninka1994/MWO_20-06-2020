@@ -28,11 +28,14 @@ public class Report1 {
 
     public void printOnConsole(){
         TreeMap<String, Double> a = getReport();
-
-        for(Map.Entry<String,Double> entry : a.entrySet()) {
-            String key = entry.getKey();
-            Double value = entry.getValue();
-            System.out.println(key + " => " + value + " h");
+        if(recordEntries.size() > 0) {
+            for (Map.Entry<String, Double> entry : a.entrySet()) {
+                String key = entry.getKey();
+                Double value = entry.getValue();
+                System.out.println(key + " => " + value + " h");
+            }
+        }else{
+            System.out.println("Brak danych za ten rok :(");
         }
     }
 

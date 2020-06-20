@@ -8,11 +8,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 
@@ -46,6 +42,8 @@ public class ReadData {
 	
 	public static ArrayList<RecordEntry> readXls(String path) {
 		ArrayList<RecordEntry> recordEntryList = new ArrayList<RecordEntry>();
+		double hours;
+
 		try {
 			Workbook wb = WorkbookFactory.create(new File(path));
 			String fullPath = path;
@@ -62,20 +60,27 @@ public class ReadData {
 				String project = sheet.getSheetName();
 				for (int j = 1; j <= sheet.getLastRowNum(); j++) {
 					Row r = sheet.getRow(j);
-					
-					Date date = r.getCell(0).getDateCellValue();
-					LocalDate localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-					String description = r.getCell(1).getStringCellValue();;
-					double hours = r.getCell(2).getNumericCellValue();
-					
-					RecordEntry toAdd = new RecordEntry();
-					toAdd.setDate(localDate);
-					toAdd.setDescription(description);
-					toAdd.setWorkingHours(hours);
-					toAdd.setProjectName(project);
-					toAdd.setWorkerName(name);
-					
-					recordEntryList.add(toAdd);
+					if (r.getCell(0).getCellType() == CellType.NUMERIC && r.getCell(0).getCellType() != CellType.BLANK ) {
+						Date date = r.getCell(0).getDateCellValue();
+						LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+						String description = r.getCell(1).getStringCellValue();
+						if (r.getCell(2).getCellType() == CellType.NUMERIC && r.getCell(2).getCellType() != CellType.BLANK) {
+							hours = r.getCell(2).getNumericCellValue();
+
+						}else{
+							hours = 0;
+						}
+
+						RecordEntry toAdd = new RecordEntry();
+						toAdd.setDate(localDate);
+						toAdd.setDescription(description);
+						toAdd.setWorkingHours(hours);
+						toAdd.setProjectName(project);
+						toAdd.setWorkerName(name);
+
+						recordEntryList.add(toAdd);
+					}
 					
 			}
 		}
@@ -85,10 +90,22 @@ public class ReadData {
         	e.printStackTrace();
             
         }
-		
+
 		return recordEntryList;
 	}
-	
+	public static ArrayList<RecordEntry> readAllFromFolder(String myDirectoryPath){
+		ArrayList<String> pathList = folderExplorer(myDirectoryPath);
+		ArrayList<RecordEntry> retVal = new ArrayList<>();
+		ArrayList<RecordEntry> recordList;
+
+		for(String path1: pathList) {
+			recordList = readXls(path1);
+			for(RecordEntry r: recordList) {
+				retVal.add(r);
+			}
+		}
+		return retVal;
+	}
 	public static void main(String[] args) {
         System.out.println("Hello World!");
         String path = "C:\\Users\\krzuc\\Desktop\\pracownia projektowa\\MWO_20-06-2020\\dane";
