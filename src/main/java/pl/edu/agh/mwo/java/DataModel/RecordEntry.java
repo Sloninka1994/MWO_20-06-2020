@@ -1,11 +1,12 @@
 package pl.edu.agh.mwo.java.DataModel;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class RecordEntry {
     private String workerName;
     private String projectName;
-    private Date date;
+    private LocalDate date;
     private String description;
     private double workingHours;
 
@@ -25,11 +26,11 @@ public class RecordEntry {
         this.projectName = projectName;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -47,5 +48,9 @@ public class RecordEntry {
 
     public void setWorkingHours(double workingHours) {
         this.workingHours = workingHours;
+    }
+
+    public String toString(){
+        return  workerName + " spent " + Double.toString( workingHours) + "h on project " + projectName + " doing " + description + " (" + date.toString() + ")";
     }
 }
