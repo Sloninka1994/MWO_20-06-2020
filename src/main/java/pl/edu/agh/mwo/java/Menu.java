@@ -97,8 +97,12 @@ public class Menu {
     	System.out.println(path);
 
     	re = ReadData.readAllFromFolder(path);
-
+		if(ReadData.errorsOccured()){
+			System.out.println("Podczas wczytywania danych wystąpiły następujące problemy:");
+			ReadData.printErrorLog();
+		}
     	if (re.size() > 0) {
+
 			printMenu();
 		}else{
 			System.out.println("Wczytywanie danych nie powiodło się.");

@@ -13,7 +13,7 @@ import org.apache.poi.ss.usermodel.*;
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 
 public class ReadData {
-	
+	private static ArrayList<String> errorLogList;
 	public static ArrayList<String> folderExplorer(String myDirectoryPath) {
 		ArrayList<String> pathList = new ArrayList<String>();
 		
@@ -41,6 +41,7 @@ public class ReadData {
 	}
 	
 	public static ArrayList<RecordEntry> readXls(String path) {
+		errorLogList = new ArrayList<>();
 		ArrayList<RecordEntry> recordEntryList = new ArrayList<RecordEntry>();
 		double hours;
 
@@ -65,13 +66,13 @@ public class ReadData {
 						LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
 						String description = r.getCell(1).getStringCellValue();
-						if (r.getCell(2).getCellType() == CellType.NUMERIC && r.getCell(2).getCellType() != CellType.BLANK) {
+
+						try{
 							hours = r.getCell(2).getNumericCellValue();
-
-						}else{
+						}catch (Exception e){
 							hours = 0;
+							errorLogList.add("Reading hours error: " + fullPath + " - " + sheet + " row " + String.valueOf(r.getRowNum()) + " >> value set to zero");
 						}
-
 						RecordEntry toAdd = new RecordEntry();
 						toAdd.setDate(localDate);
 						toAdd.setDescription(description);
@@ -80,6 +81,8 @@ public class ReadData {
 						toAdd.setWorkerName(name);
 
 						recordEntryList.add(toAdd);
+					} else {
+						errorLogList.add("Reading date error: " + fullPath + " - " + sheet + " row " + String.valueOf(r.getRowNum()) + " >> NOT ADDED" );
 					}
 					
 			}
@@ -88,10 +91,14 @@ public class ReadData {
 			
         } catch (EncryptedDocumentException | IOException e) {
         	e.printStackTrace();
-            
         }
 
 		return recordEntryList;
+	}
+	public static void printErrorLog(){
+		for (String itm : errorLogList){
+			System.out.println(itm);
+		}
 	}
 	public static ArrayList<RecordEntry> readAllFromFolder(String myDirectoryPath){
 		ArrayList<String> pathList = folderExplorer(myDirectoryPath);
@@ -106,6 +113,7 @@ public class ReadData {
 		}
 		return retVal;
 	}
+
 	public static void main(String[] args) {
         System.out.println("Hello World!");
         String path = "C:\\Users\\krzuc\\Desktop\\pracownia projektowa\\MWO_20-06-2020\\dane";
@@ -119,4 +127,13 @@ public class ReadData {
         	 }
         }
     }
+
+	public static boolean errorsOccured() {
+		if (errorLogList.size() > 0 ){
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 }
