@@ -42,8 +42,17 @@ Program pobiera dane z plików Excel (rozszerzenie XLS) umieszczonych w struktur
 ```
 
 ## Interfejs programu (menu)
+Po wczytaniu danych program wyświetla menu pozwalające na generowanie wybranego raportu.
 
-...
+		1: Alfabetyczne zestawienie listy pracowników <-> liczby godzin
+		2: Alfabetyczne zestawienie projektów <-> liczba godzin
+		3: Szczegółowy wykaz pracy kazdego pracownika
+		4: Procentowe zaangazowanie danego pracownika w projektach w danym roku
+		5: Szczegółowy wykaz pracy w danym projekcie
+		6: Pokaż wszystkie zaimportowane dane
+		7: Exit
+
+Przykład: Po naciśnięciu [1] i [Enter] zostanie wygenerowany raport pierwszy.
 
 ## Funkcjonalnosci programu
 * opis raportu 1
