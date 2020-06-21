@@ -3,15 +3,16 @@ package pl.edu.agh.mwo.java.Reports;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.knowm.xchart.BitmapEncoder;
+import org.knowm.xchart.CategoryChart;
+import org.knowm.xchart.CategoryChartBuilder;
+import org.knowm.xchart.style.Styler;
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 import pl.edu.agh.mwo.java.Helpers.ReportFunctions;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class ReportSimple {
     protected ArrayList<RecordEntry> recordEntries;
@@ -79,6 +80,27 @@ public class ReportSimple {
 
             }
         }
+    }
+    public void generateBarChart(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Podaj folder zapisu:");
+        String folderPath = scan.nextLine();
+        File dir = new File(folderPath);
+        if (dir.exists()) {
+            TreeMap<String, Double> a = getReport();
+            String[] seriesLabel = ReportFunctions.extractLabels(a);
+            Double[] valuesLabel = ReportFunctions.extractValues(a);
+            CategoryChart chart = new CategoryChartBuilder().width(1200).height(800).title(reportName).xAxisTitle(headerCol1).yAxisTitle(headerCol2).build();
+            chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
+            chart.getStyler().setHasAnnotations(true);
 
+            chart.addSeries(reportName, Arrays.asList(seriesLabel), Arrays.asList(valuesLabel));
+            try{
+                BitmapEncoder.saveBitmap(chart, folderPath + "\\Report6_chart", BitmapEncoder.BitmapFormat.PNG );
+                System.out.println("Wykres został wygenerowany poprawnie!");
+            }catch (Exception e){
+
+            }
+        }
     }
 }

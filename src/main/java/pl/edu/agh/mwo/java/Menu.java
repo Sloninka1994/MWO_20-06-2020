@@ -44,15 +44,16 @@ public class Menu {
 			System.out.println(ANSI_BLUE + "3:"+ ANSI_RESET +" Szczegółowy wykaz pracy kazdego pracownika");
 			System.out.println(ANSI_BLUE + "4:"+ ANSI_RESET +" Procentowe zaangazowanie danego pracownika w projektach w danym roku");
 			System.out.println(ANSI_BLUE + "5:"+ ANSI_RESET +" Szczegółowy wykaz pracy w danym projekcie");
-			System.out.println(ANSI_BLUE + "6:"+ ANSI_RESET +" Pokaż wszystkie zaimportowane dane");
-			System.out.println(ANSI_BLUE + "7:"+ ANSI_RESET + ANSI_RED +" Exit"+ ANSI_RESET);
+			System.out.println(ANSI_BLUE + "6:"+ ANSI_RESET +" Wygeneruj wykres słupkowy dla raportu 2");
+			System.out.println(ANSI_BLUE + "7:"+ ANSI_RESET +" Pokaż wszystkie zaimportowane dane");
+			System.out.println(ANSI_BLUE + "8:"+ ANSI_RESET + ANSI_RED +" Exit"+ ANSI_RESET);
 
 			String option = scan.nextLine();
 
 			switch (option) {
 				case "1":
 					System.out.println(ANSI_GREEN + "Generating Report 1" + ANSI_RESET);
-					System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego am powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego ma powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
 					String sYear = scan.nextLine();
 					int Year;
 					try {
@@ -73,7 +74,7 @@ public class Menu {
 					break;
 				case "2":
 					System.out.println(ANSI_GREEN +"Generating Report 2"+ANSI_RESET);
-					System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego am powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego ma powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
 					String sYear2 = scan.nextLine();
 					int Year2;
 					try {
@@ -101,11 +102,25 @@ public class Menu {
 					System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 5"+ ANSI_YELLOW + "***" + ANSI_RESET);
 					break;
 				case "6":
+					System.out.println(ANSI_GREEN +"Generating Report 6"+ANSI_RESET);
+					System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego ma powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					String sYear6 = scan.nextLine();
+					int Year6;
+					try {
+						Year6 = Integer.parseInt(sYear6);
+					} catch (Exception e) {
+						System.out.println(ANSI_RED + "Wprowadzono błędną wartość" + ANSI_RESET);
+						break;
+					}
+					Report2 r6 = new Report2(re, Year6);
+					r6.generateBarChart();
+					break;
+				case "7":
 					for(RecordEntry itm : re){
 						System.out.println(itm.toString());
 					}
 					break;
-				case "7":
+				case "8":
 					System.out.println(ANSI_GREEN + "Zapraszamy ponownie! " + ANSI_RESET);
 					return;
 				default:
