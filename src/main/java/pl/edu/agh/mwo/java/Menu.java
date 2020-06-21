@@ -2,6 +2,7 @@ package pl.edu.agh.mwo.java;
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 import pl.edu.agh.mwo.java.ReadData.ReadData;
 import pl.edu.agh.mwo.java.Reports.Report1;
+import pl.edu.agh.mwo.java.Reports.Report2;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -60,6 +61,17 @@ public class Menu {
 				break;
 			case "2": 
 				System.out.println("Generating Report 2");
+				System.out.println("Podaj rok dla którego am powstać raport:");
+				String sYear2 = scan.nextLine();
+				int Year2;
+				try {
+					Year2 = Integer.parseInt(sYear2);
+				} catch (Exception e) {
+					System.out.println("Wprowadzono błędną wartość");
+					break;
+				}
+				Report2 r2 = new Report2(re, Year2);
+				r2.printOnConsole();
 				break;
 			case "3": 
 				System.out.println("Generating Report 3");
@@ -105,7 +117,7 @@ public class Menu {
 
 			printMenu();
 		}else{
-			System.out.println("Wczytywanie danych nie powiodło się.");
+			System.out.println("Wczytywanie danych nie powiodło się. Proszę upewnić się że ścieżka do folderu jest poprawna.");
 		}
         //Funkcje odpowiednie do raportu -> Wczytywanie Roku, miesiąca, Imienia, etc;
     	
