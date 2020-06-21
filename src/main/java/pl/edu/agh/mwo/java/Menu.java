@@ -64,11 +64,7 @@ public class Menu {
 					}
 					Report1 r1 = new Report1(re,Year);
 					r1.printOnConsole();
-					System.out.println("Chcesz wyeksportować ten raport do Excela? T/N");
-					String usrResp = scan.nextLine();
-					if (usrResp.equals("Y")){
-						r1.exportToExcel();
-					}
+					// generate and print report
 					break;
 				case "2":
 					System.out.println(ANSI_GREEN +"Generating Report 2"+ANSI_RESET);
