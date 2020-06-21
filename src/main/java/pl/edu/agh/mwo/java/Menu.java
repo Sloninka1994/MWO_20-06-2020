@@ -46,7 +46,7 @@ public class Menu {
 			switch (option) {
 			case "1": 
 				System.out.println("Generating Report 1");
-				System.out.println("Podaj rok dla którego am powstać raport:");
+				System.out.println("Podaj rok dla którego ma powstać raport:");
 				String sYear = scan.nextLine();
 				int Year;
 				try {
@@ -61,7 +61,7 @@ public class Menu {
 				break;
 			case "2": 
 				System.out.println("Generating Report 2");
-				System.out.println("Podaj rok dla którego am powstać raport:");
+				System.out.println("Podaj rok dla którego ma powstać raport:");
 				String sYear2 = scan.nextLine();
 				int Year2;
 				try {
