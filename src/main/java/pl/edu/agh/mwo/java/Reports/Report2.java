@@ -1,45 +1,38 @@
 package pl.edu.agh.mwo.java.Reports;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 import pl.edu.agh.mwo.java.DataModel.RecordFilter;
 import pl.edu.agh.mwo.java.Helpers.ReportFunctions;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
-public class Report2 {
-    private ArrayList<RecordEntry> recordEntries;
+public class Report2 extends ReportSimple {
     public Report2(ArrayList<RecordEntry> recordEntries, int Year){
         RecordFilter recordFilter = new RecordFilter(recordEntries);
         this.recordEntries =  recordFilter.byYear(Year);
+        this.headerCol1 = "Projekt";
+        this.headerCol2 = "Ilość godzin";
+        this.reportName = "Raport2";
     }
+    @Override
     public TreeMap<String, Double> getReport(){
         TreeMap<String, Double> retVal = new TreeMap();
-        for(int i=0; i < recordEntries.size(); i++){
-            if (retVal.containsKey(recordEntries.get(i).getProjectName())) {
-                retVal.put(recordEntries.get(i).getProjectName(), retVal.get(recordEntries.get(i).getProjectName()) + recordEntries.get(i).getWorkingHours());
+        for(int i=0; i < this.recordEntries.size(); i++){
+            if (retVal.containsKey(this.recordEntries.get(i).getProjectName())) {
+                retVal.put(this.recordEntries.get(i).getProjectName(), retVal.get(this.recordEntries.get(i).getProjectName()) + this.recordEntries.get(i).getWorkingHours());
             }else{
-                retVal.put(recordEntries.get(i).getProjectName(),recordEntries.get(i).getWorkingHours());
+                retVal.put(this.recordEntries.get(i).getProjectName(),this.recordEntries.get(i).getWorkingHours());
             }
         }
         return retVal;
     }
-    public void printOnConsole(){
-        TreeMap<String, Double> a = getReport();
-        int maxLenKey;
-        int maxLenVal;
-        if(recordEntries.size() > 0) {
-            maxLenKey = ReportFunctions.maxLengthOfMapTreeKey(a);
-            maxLenVal = ReportFunctions.maxLengthOfMapTreeValue(a);
 
-            for (Map.Entry<String, Double> entry : a.entrySet()) {
-                String key = entry.getKey();
-                String value = entry.getValue().toString();
-                System.out.println(ReportFunctions.adjustTextToLength(key, maxLenKey)  + " => " + ReportFunctions.adjustTextToLength(value, maxLenVal) + " h");
-            }
-        }else{
-            System.out.println("Brak danych za ten rok :(");
-        }
-    }
 }

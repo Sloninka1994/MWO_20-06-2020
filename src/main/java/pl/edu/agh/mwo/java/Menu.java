@@ -17,7 +17,6 @@ public class Menu {
 	public static final String ANSI_GREEN = "\u001b[32m";
 	public static final String ANSI_RESET = "\u001B[0m";
 
-
 	public static String getPath(){
 		String path;
 		while (true) {
@@ -63,8 +62,14 @@ public class Menu {
 						break;
 					}
 					Report1 r1 = new Report1(re,Year);
-					r1.printOnConsole();
-					// generate and print report
+					if(r1.printOnConsole()){
+						System.out.println("Chcesz wyeksportować ten raport do Excela? T/N");
+						String usrResp = scan.nextLine();
+						if (usrResp.equals("T")){
+							r1.exportToExcel();
+						}
+					}
+
 					break;
 				case "2":
 					System.out.println(ANSI_GREEN +"Generating Report 2"+ANSI_RESET);
@@ -78,7 +83,13 @@ public class Menu {
 						break;
 					}
 					Report2 r2 = new Report2(re, Year2);
-					r2.printOnConsole();
+					if(r2.printOnConsole()){
+						System.out.println("Chcesz wyeksportować ten raport do Excela? T/N");
+						String usrResp = scan.nextLine();
+						if (usrResp.equals("T")){
+							r2.exportToExcel();
+						}
+					}
 					break;
 				case "3":
 					System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 3"+ ANSI_YELLOW + "***" + ANSI_RESET);

@@ -1,5 +1,7 @@
 package pl.edu.agh.mwo.java.Reports;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
@@ -14,60 +16,13 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class Report1 {
-    private ArrayList<RecordEntry> recordEntries;
+public class Report1 extends ReportSimple {
     public Report1(ArrayList<RecordEntry> recordEntries, int Year){
         RecordFilter recordFilter = new RecordFilter(recordEntries);
         this.recordEntries =  recordFilter.byYear(Year);
-    }
-
-    public TreeMap<String, Double> getReport(){
-        TreeMap<String, Double> retVal = new TreeMap();
-        for(int i=0; i < recordEntries.size(); i++){
-            if (retVal.containsKey(recordEntries.get(i).getWorkerName())) {
-                retVal.put(recordEntries.get(i).getWorkerName(), retVal.get(recordEntries.get(i).getWorkerName()) + recordEntries.get(i).getWorkingHours());
-            }else{
-                retVal.put(recordEntries.get(i).getWorkerName(),recordEntries.get(i).getWorkingHours());
-            }
-        }
-        return retVal;
-    }
-
-    public void printOnConsole(){
-        TreeMap<String, Double> a = getReport();
-        int maxLenKey;
-        int maxLenVal;
-        if(recordEntries.size() > 0) {
-            maxLenKey = ReportFunctions.maxLengthOfMapTreeKey(a);
-            maxLenVal = ReportFunctions.maxLengthOfMapTreeValue(a);
-
-            for (Map.Entry<String, Double> entry : a.entrySet()) {
-                String key = entry.getKey();
-                String value = entry.getValue().toString();
-                System.out.println(ReportFunctions.adjustTextToLength(key, maxLenKey)  + " => " + ReportFunctions.adjustTextToLength(value, maxLenVal) + " h");
-            }
-        }else{
-            System.out.println("Brak danych za ten rok :(");
-        }
-    }
-    public void exportToExcel(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Podaj folder zapisu:");
-        String folderPath = scan.nextLine();
-        File dir = new File(folderPath);
-        if (dir.exists()){
-            TreeMap<String, Double> a = getReport();
-            Workbook wb = new HSSFWorkbook();
-
-            try  (OutputStream fileOut = new FileOutputStream("Raport1.xls")) {
-                wb.write(fileOut);
-            }catch (Exception e){
-
-            }
-        }
-
-
-
+        this.headerCol1 = "Pracownik";
+        this.headerCol2 = "Ilość godzin";
+        this.reportName = "Raport1";
     }
 
 }
