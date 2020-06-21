@@ -4,8 +4,10 @@ import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 import pl.edu.agh.mwo.java.DataModel.RecordFilter;
 import pl.edu.agh.mwo.java.Helpers.ReportFunctions;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Report1 {
@@ -43,6 +45,19 @@ public class Report1 {
         }else{
             System.out.println("Brak danych za ten rok :(");
         }
+    }
+    public void exportToExcel(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Podaj folder zapisu:");
+        String folderPath = scan.nextLine();
+        File dir = new File(folderPath);
+        if (dir.exists()){
+            TreeMap<String, Double> a = getReport();
+            
+        }
+
+
+
     }
 
 }
