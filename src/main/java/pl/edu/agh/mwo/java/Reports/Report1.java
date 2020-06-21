@@ -1,10 +1,14 @@
 package pl.edu.agh.mwo.java.Reports;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 import pl.edu.agh.mwo.java.DataModel.RecordFilter;
 import pl.edu.agh.mwo.java.Helpers.ReportFunctions;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -53,7 +57,13 @@ public class Report1 {
         File dir = new File(folderPath);
         if (dir.exists()){
             TreeMap<String, Double> a = getReport();
-            
+            Workbook wb = new HSSFWorkbook();
+
+            try  (OutputStream fileOut = new FileOutputStream("Raport1.xls")) {
+                wb.write(fileOut);
+            }catch (Exception e){
+
+            }
         }
 
 
