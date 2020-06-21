@@ -15,6 +15,7 @@ import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 public class ReadData {
 	private static ArrayList<String> errorLogList;
 	public static ArrayList<String> folderExplorer(String myDirectoryPath) {
+
 		ArrayList<String> pathList = new ArrayList<String>();
 		
 		File dir = new File(myDirectoryPath);
@@ -41,7 +42,7 @@ public class ReadData {
 	}
 	
 	public static ArrayList<RecordEntry> readXls(String path) {
-		errorLogList = new ArrayList<>();
+
 		ArrayList<RecordEntry> recordEntryList = new ArrayList<RecordEntry>();
 		double hours;
 
@@ -101,6 +102,7 @@ public class ReadData {
 		}
 	}
 	public static ArrayList<RecordEntry> readAllFromFolder(String myDirectoryPath){
+		errorLogList = new ArrayList<>();
 		ArrayList<String> pathList = folderExplorer(myDirectoryPath);
 		ArrayList<RecordEntry> retVal = new ArrayList<>();
 		ArrayList<RecordEntry> recordList;
