@@ -2,6 +2,7 @@ package pl.edu.agh.mwo.java.Reports;
 
 import pl.edu.agh.mwo.java.DataModel.RecordEntry;
 import pl.edu.agh.mwo.java.DataModel.RecordFilter;
+import pl.edu.agh.mwo.java.Helpers.ReportFunctions;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,11 +27,16 @@ public class Report2 {
     }
     public void printOnConsole(){
         TreeMap<String, Double> a = getReport();
+        int maxLenKey;
+        int maxLenVal;
         if(recordEntries.size() > 0) {
+            maxLenKey = ReportFunctions.maxLengthOfMapTreeKey(a);
+            maxLenVal = ReportFunctions.maxLengthOfMapTreeValue(a);
+
             for (Map.Entry<String, Double> entry : a.entrySet()) {
                 String key = entry.getKey();
-                Double value = entry.getValue();
-                System.out.println(key + " => " + value + " h");
+                String value = entry.getValue().toString();
+                System.out.println(ReportFunctions.adjustTextToLength(key, maxLenKey)  + " => " + ReportFunctions.adjustTextToLength(value, maxLenVal) + " h");
             }
         }else{
             System.out.println("Brak danych za ten rok :(");
