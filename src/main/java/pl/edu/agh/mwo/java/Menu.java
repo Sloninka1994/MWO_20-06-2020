@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Menu {
 	static ArrayList<RecordEntry> re = new ArrayList<RecordEntry>();
-	
+
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_BLUE = "\u001b[36m";
 	public static final String ANSI_YELLOW = "\u001b[33m";
@@ -22,18 +22,18 @@ public class Menu {
 		String path;
 		while (true) {
 			Scanner scan = new Scanner(System.in);
-	        System.out.println();
-		System.out.println(ANSI_YELLOW + "*** "  + "Podaj ścieżkę do katalogu z arkuszami pracowników!: " + ANSI_YELLOW + "***" + ANSI_RESET);
-	        path = scan.nextLine();
-	        if (path.length() > 0) {
-	        	return path;
-	        }
-	        else {
-	        	System.out.println(ANSI_RED + "Pusta sciezka !" + ANSI_RESET);
-	        }
+			System.out.println();
+			System.out.println(ANSI_YELLOW + "*** "  + "Podaj ścieżkę do katalogu z arkuszami pracowników!: " + ANSI_YELLOW + "***" + ANSI_RESET);
+			path = scan.nextLine();
+			if (path.length() > 0) {
+				return path;
+			}
+			else {
+				System.out.println(ANSI_RED + "Pusta sciezka !" + ANSI_RESET);
+			}
 		}
-    }
-	
+	}
+
 	public static void printMenu() {
 		while (true) {
 
@@ -47,89 +47,89 @@ public class Menu {
 			System.out.println(ANSI_BLUE + "5:"+ ANSI_RESET +" Szczegółowy wykaz pracy w danym projekcie");
 			System.out.println(ANSI_BLUE + "6:"+ ANSI_RESET +" Pokaż wszystkie zaimportowane dane");
 			System.out.println(ANSI_BLUE + "7:"+ ANSI_RESET + ANSI_RED +" Exit"+ ANSI_RESET);
-			
+
 			String option = scan.nextLine();
-			
+
 			switch (option) {
-			case "1": 
-				System.out.println(ANSI_GREEN + "Generating Report 1" + ANSI_RESET);
-				System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego am powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
-				String sYear = scan.nextLine();
-				int Year;
-				try {
-					Year = Integer.parseInt(sYear);
-				} catch (Exception e) {
-					System.out.println(ANSI_RED + "Wprowadzono błędną wartość" + ANSI_RESET);
+				case "1":
+					System.out.println(ANSI_GREEN + "Generating Report 1" + ANSI_RESET);
+					System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego am powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					String sYear = scan.nextLine();
+					int Year;
+					try {
+						Year = Integer.parseInt(sYear);
+					} catch (Exception e) {
+						System.out.println(ANSI_RED + "Wprowadzono błędną wartość" + ANSI_RESET);
+						break;
+					}
+					Report1 r1 = new Report1(re,Year);
+					r1.printOnConsole();
+					// generate and print report
 					break;
-				}
-				Report1 r1 = new Report1(re,Year);
-				r1.printOnConsole();
-				// generate and print report
-				break;
-			case "2": 
-				System.out.println(ANSI_GREEN +"Generating Report 2"+ANSI_RESET);
-				System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego am powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
-				String sYear2 = scan.nextLine();
-				int Year2;
-				try {
-					Year2 = Integer.parseInt(sYear2);
-				} catch (Exception e) {
-					System.out.println(ANSI_RED + "Wprowadzono błędną wartość" + ANSI_RESET);
+				case "2":
+					System.out.println(ANSI_GREEN +"Generating Report 2"+ANSI_RESET);
+					System.out.println(ANSI_YELLOW + "*** "  +"Podaj rok dla którego am powstać raport:"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					String sYear2 = scan.nextLine();
+					int Year2;
+					try {
+						Year2 = Integer.parseInt(sYear2);
+					} catch (Exception e) {
+						System.out.println(ANSI_RED + "Wprowadzono błędną wartość" + ANSI_RESET);
+						break;
+					}
+					Report2 r2 = new Report2(re, Year2);
+					r2.printOnConsole();
 					break;
-				}
-				Report2 r2 = new Report2(re, Year2);
-				r2.printOnConsole();
-				break;
-			case "3": 
-				System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 3"+ ANSI_YELLOW + "***" + ANSI_RESET);
-				break;
-			case "4": 
-				System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 4"+ ANSI_YELLOW + "***" + ANSI_RESET);
-				break;
-			case "5": 
-				System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 5"+ ANSI_YELLOW + "***" + ANSI_RESET);
-				break;
-			case "6":
-				for(RecordEntry itm : re){
-					System.out.println(itm.toString());
-				}
-				break;
-			case "7":
-				System.out.println(ANSI_GREEN + "Zapraszamy ponownie! " + ANSI_RESET);
-				return;
-			default:
-				System.out.println(ANSI_RED+ "Nie ma takiej opcji! Wybierz ponownie!" + ANSI_RESET);
-				break;
+				case "3":
+					System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 3"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					break;
+				case "4":
+					System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 4"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					break;
+				case "5":
+					System.out.println(ANSI_YELLOW + "*** " + ANSI_RESET +"Generating Report 5"+ ANSI_YELLOW + "***" + ANSI_RESET);
+					break;
+				case "6":
+					for(RecordEntry itm : re){
+						System.out.println(itm.toString());
+					}
+					break;
+				case "7":
+					System.out.println(ANSI_GREEN + "Zapraszamy ponownie! " + ANSI_RESET);
+					return;
+				default:
+					System.out.println(ANSI_RED+ "Nie ma takiej opcji! Wybierz ponownie!" + ANSI_RESET);
+					break;
 			}
-		}	
-		
+		}
+
 	}
-	
-    public static void main(String[] args) {
-    	
-    	String path;
-    	String option;
-    	System.out.println(ANSI_GREEN + "Witaj w programie do generowania raportów - MWO2020!" + ANSI_RESET);
-    	System.out.println("____________________________________________________");
 
-    	path = getPath();
-    	System.out.println(path);
+	public static void main(String[] args) {
 
-    	re = ReadData.readAllFromFolder(path);
+		String path;
+		String option;
+		System.out.println(ANSI_GREEN + "Witaj w programie do generowania raportów - MWO2020!" + ANSI_RESET);
+		System.out.println("____________________________________________________");
+
+		path = getPath();
+		System.out.println(path);
+
+		re = ReadData.readAllFromFolder(path);
 		if(ReadData.errorsOccured()){
 			System.out.println(ANSI_RED+"Podczas wczytywania danych wystąpiły następujące problemy:"+ANSI_RESET);
 			ReadData.printErrorLog();
 		}
-    	if (re.size() > 0) {
+		if (re.size() > 0) {
 
 			printMenu();
 		}else{
 			System.out.println(ANSI_RED+"Wczytywanie danych nie powiodło się. Proszę upewnić się że ścieżka do folderu jest poprawna."+ANSI_RESET);
 		}
-        //Funkcje odpowiednie do raportu -> Wczytywanie Roku, miesiąca, Imienia, etc;
-    	
-    	
-        
+		//Funkcje odpowiednie do raportu -> Wczytywanie Roku, miesiąca, Imienia, etc;
 
-    }
+
+
+
+	}
 }
