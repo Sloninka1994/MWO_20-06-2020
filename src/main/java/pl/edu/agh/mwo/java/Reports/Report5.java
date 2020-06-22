@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Report5 {
+public class Report5 extends ReportSimple {
     private ArrayList<RecordEntry> recordEntries;
     public Report5(ArrayList<RecordEntry> recordEntries, String projectName){
         RecordFilter recordFilter = new RecordFilter(recordEntries);
         this.recordEntries =  recordFilter.byProject(projectName);
+        this.headerCol1 = "Projekt";
+        this.headerCol2 = "Ilość godzin";
+        this.reportName = "Raport2";
     }
 
+    @Override
     public TreeMap<String, Double> getReport(){
         TreeMap<String, Double> retVal = new TreeMap();
         for(int i=0; i < recordEntries.size(); i++){
@@ -26,7 +30,7 @@ public class Report5 {
         return retVal;
     }
 
-    public void printOnConsole(){
+    public boolean printOnConsoleReport5(){
  
     	
     	int lp = 0; double sum = 0.0;
@@ -44,12 +48,12 @@ public class Report5 {
                 System.out.println("\n|________|_____________________________|_______________|");
                 
             }
-            
             System.out.printf("%7s %35s %.2f %1s ","Suma: ","", sum, "h"," |");
             System.out.println("\n|______________________________________________________|");
+            return true;
         }else{
             System.out.println("Projekt o podanej nazwie nie istnieje. Sprawdź, czy wpisaleś prawidłowa nazwe!");
-        }
+        }return false;
     }
 
 }
