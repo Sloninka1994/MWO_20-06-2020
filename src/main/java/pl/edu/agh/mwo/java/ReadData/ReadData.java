@@ -55,8 +55,6 @@ public class ReadData {
 			int startOfSurname = fullPath.lastIndexOf("\\")+1;		
 			String name = new String(fullPath.substring(startOfSurname, endOfname));
 
-			System.out.println(name);
-
 			for (int i = 0; i < wb.getNumberOfSheets(); i++) {
 				Sheet sheet = wb.getSheetAt(i);
 				String project = sheet.getSheetName();

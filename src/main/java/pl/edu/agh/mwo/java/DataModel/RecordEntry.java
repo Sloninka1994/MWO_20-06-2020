@@ -51,6 +51,6 @@ public class RecordEntry {
     }
 
     public String toString(){
-        return  workerName + " spent " + Double.toString( workingHours) + "h on project " + projectName + " doing " + description + " (" + date.toString() + ")";
+        return  workerName + " spędził " + Double.toString( workingHours) + " godz. na projekcie " + projectName + " zajmując się " + description + " (" + date.toString() + ")";
     }
 }

@@ -6,15 +6,15 @@ public class RecordFilter {
     private ArrayList<RecordEntry> recordEntries;
 
     public RecordFilter(ArrayList<RecordEntry> recordEntries){
-        this.recordEntries = recordEntries;
+        this.setRecordEntries(recordEntries);
     }
 
     public ArrayList<RecordEntry> byYear(int year){
         ArrayList<RecordEntry> retVal = new ArrayList<RecordEntry>();
 
-        for(int i=0; i < recordEntries.size(); i++){
-            if(year == recordEntries.get(i).getDate().getYear()){
-                retVal.add(recordEntries.get(i));
+        for(int i = 0; i < getRecordEntries().size(); i++){
+            if(year == getRecordEntries().get(i).getDate().getYear()){
+                retVal.add(getRecordEntries().get(i));
             };
         }
         return retVal;
@@ -22,9 +22,9 @@ public class RecordFilter {
 
     public ArrayList<RecordEntry> byProject(String projectName){
         ArrayList<RecordEntry> retVal = new ArrayList<RecordEntry>();
-        for(int i=0; i < recordEntries.size(); i++){
-            if(recordEntries.get(i).getProjectName().equals(projectName)){
-                retVal.add(recordEntries.get(i));
+        for(int i = 0; i < getRecordEntries().size(); i++){
+            if(getRecordEntries().get(i).getProjectName().equals(projectName)){
+                retVal.add(getRecordEntries().get(i));
             };
         }
         return retVal;
@@ -32,11 +32,19 @@ public class RecordFilter {
 
     public ArrayList<RecordEntry> byWorkerName(String workerName){
         ArrayList<RecordEntry> retVal = new ArrayList<RecordEntry>();
-        for(int i=0; i < recordEntries.size(); i++){
-            if(recordEntries.get(i).getWorkerName().equals(workerName)){
-                retVal.add(recordEntries.get(i));
+        for(int i = 0; i < getRecordEntries().size(); i++){
+            if(getRecordEntries().get(i).getWorkerName().equals(workerName)){
+                retVal.add(getRecordEntries().get(i));
             };
         }
         return retVal;
+    }
+
+    public ArrayList<RecordEntry> getRecordEntries() {
+        return recordEntries;
+    }
+
+    public void setRecordEntries(ArrayList<RecordEntry> recordEntries) {
+        this.recordEntries = recordEntries;
     }
 }
