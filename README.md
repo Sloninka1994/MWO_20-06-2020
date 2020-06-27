@@ -62,8 +62,14 @@ Dane wyświetlane są w postaci czytelnej tabeli:
 Imie i nazwisko -> ilość godzin 
 
 * RAPORT 2 
+Program generuje alfabetyczną listę projektów za dany rok kalendarzowy, wraz z ilością godzin, które zostały przepracowane w danym projekcie
+
+1/Projekt_X -> ilość godzin
+
+* RAPORT 3
+
+Program generuje wykaz pracy każdego pracownika, wraz z ilo
 
 
-* opis raportu 2
-* ...
+
 ## Ograniczenia / known issues
