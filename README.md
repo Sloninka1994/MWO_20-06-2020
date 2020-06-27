@@ -55,7 +55,15 @@ Po wczytaniu danych program wyświetla menu pozwalające na generowanie wybraneg
 Przykład: Po naciśnięciu [1] i [Enter] zostanie wygenerowany raport pierwszy.
 
 ## Funkcjonalnosci programu
-* opis raportu 1
+* RAPORT 1
+Program generuje alfabetyczną listę pracowników w danym roku kalendarzowym, wraz z ilością przepracowanych godzin.
+Dane wyświetlane są w postaci czytelnej tabeli:
+
+Imie i nazwisko -> ilość godzin 
+
+* RAPORT 2 
+
+
 * opis raportu 2
 * ...
 ## Ograniczenia / known issues
